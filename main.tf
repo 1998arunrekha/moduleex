@@ -12,14 +12,17 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = var.resourcegroupname
-  location = var.location
-}
-
-module "StorageAccount" {
-    source = "./StorageAccount"
+module "ResourceGroup" {
+    source = "./ResourceGroup"
     resourcegroup = "myrg001"
     location = "west us"
-    storageaccountname = "testuserstorage5544"
+    
+}
+
+module "ResourceGroup" {
+    source = "./ResourceGroup"
+    resourcegroup = ResourceGroup.resource_group.name
+    location = "west us"
+    storageaccountname = "testmystr88"
+    
 }
